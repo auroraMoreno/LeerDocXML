@@ -22,6 +22,11 @@ namespace LeerDocXML.Controllers
             return View(albumes);
         }
 
-        //hacer metodo details y config startup
+        public IActionResult Details(int idalbum)
+        {
+            Album album = this.repo.GetAlbum(idalbum);
+            return View(album);
+        }
+
     }
 }
