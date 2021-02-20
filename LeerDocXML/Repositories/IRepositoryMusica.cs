@@ -10,5 +10,6 @@ namespace LeerDocXML.Repositories
     {
         List<Album> GetAlbumes();
         Album GetAlbum(int idAlbum);
+        void InsertarAlbum(int id, String titulo, String autor, String fechaPublicacion);
     }
 }

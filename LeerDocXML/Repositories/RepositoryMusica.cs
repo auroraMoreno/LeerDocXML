@@ -47,5 +47,11 @@ namespace LeerDocXML.Repositories
                            };
             return consulta.ToList();
         }
+
+        public void InsertarAlbum(int id, string titulo, string autor, string fechaPublicacion)
+        {
+            XElement xelem = new XElement("ALBUM");
+            xelem.SetAttributeValue("ID", id);
+        }
     }
 }
