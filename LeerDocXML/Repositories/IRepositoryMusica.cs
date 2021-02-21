@@ -11,5 +11,7 @@ namespace LeerDocXML.Repositories
         List<Album> GetAlbumes();
         Album GetAlbum(int idAlbum);
         void InsertarAlbum(int id, String titulo, String autor, String fechaPublicacion);
+        void EliminarAbum(int id);
+        void UpdateAlbum(int id, String titulo, String autor, String fechaPublicacion);
     }
 }

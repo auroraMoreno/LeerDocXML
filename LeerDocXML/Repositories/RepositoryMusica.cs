@@ -30,10 +30,20 @@ namespace LeerDocXML.Repositories
                                Id = int.Parse(datos.Attribute("ID").Value),
                                Titulo = datos.Element("TITULO").Value,
                                Autor = datos.Element("AUTOR").Value,
-                               FechaPublicacion = DateTime.Parse(datos.Element("FECHAPUBLICACION").Value)
+                               FechaPublicacion = datos.Element("FECHAPUBLICACION").Value
                            };
             return consulta.FirstOrDefault();
         }
+
+
+        private XElement GetXElement(int id)
+        {
+            var consulta = from datos in this.docxml.Descendants("ALBUM")
+                           where datos.Attribute("ID").Value == id.ToString()
+                           select datos;
+            return consulta.FirstOrDefault();
+        }
+
 
         public List<Album> GetAlbumes()
         {
@@ -43,15 +53,36 @@ namespace LeerDocXML.Repositories
                                Id = int.Parse(datos.Attribute("ID").Value),
                                Titulo = datos.Element("TITULO").Value,
                                Autor = datos.Element("AUTOR").Value,
-                               FechaPublicacion = DateTime.Parse(datos.Element("FECHAPUBLICACION").Value)
+                               FechaPublicacion = datos.Element("FECHAPUBLICACION").Value
                            };
             return consulta.ToList();
         }
 
-        public void InsertarAlbum(int id, string titulo, string autor, string fechaPublicacion)
+        public void InsertarAlbum(int id, string titulo, string autor, String fechaPublicacion)
         {
             XElement xelem = new XElement("ALBUM");
             xelem.SetAttributeValue("ID", id);
+            xelem.Add(new XElement("TITULO", titulo));
+            xelem.Add(new XElement("AUTOR", autor));
+            xelem.Add(new XElement("FECHAPUBLICACION", fechaPublicacion));
+            this.docxml.Element("ALBUMES").Add(xelem);
+            this.docxml.Save(this.path);
+        }
+
+        public void EliminarAbum(int id)
+        {
+            XElement xElement = this.GetXElement(id);
+            xElement.Remove();
+            this.docxml.Save(this.path);
+        }
+
+        public void UpdateAlbum(int id, string titulo, string autor, string fechaPublicacion)
+        {
+            XElement xElement = this.GetXElement(id);
+            xElement.Element("TITULO").Value = titulo;
+            xElement.Element("AUTOR").Value = autor;
+            xElement.Element("FECHAPUBLICACION").Value = fechaPublicacion;
+            this.docxml.Save(this.path);
         }
     }
 }

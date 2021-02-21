@@ -28,5 +28,35 @@ namespace LeerDocXML.Controllers
             return View(album);
         }
 
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(int id, String titulo, String autor, String fechaPublicacion)
+        {
+            this.repo.InsertarAlbum(id, titulo, autor, fechaPublicacion);
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Delete(int idAlbum)
+        {
+            this.repo.EliminarAbum(idAlbum);
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Edit(int idAlbum)
+        {
+            Album album = this.repo.GetAlbum(idAlbum);
+            return View(album);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(int idAlbum, String titulo, String autor, String fechaPublicacion)
+        {
+            this.repo.UpdateAlbum(idAlbum, titulo, autor, fechaPublicacion);
+            return RedirectToAction("Index");
+        }
     }
 }

@@ -10,6 +10,6 @@ namespace LeerDocXML.Models
         public int Id { get; set; }
         public String Titulo { get; set; }
         public String Autor { get; set; }
-        public DateTime FechaPublicacion { get; set; }
+        public String FechaPublicacion { get; set; }
     }
 }

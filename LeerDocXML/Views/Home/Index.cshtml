@@ -43,7 +43,9 @@
                 @Html.DisplayFor(modelItem => item.FechaPublicacion)
             </td>
             <td>
-                @Html.ActionLink("Details", "Details", new { idAlbum = item.Id }) 
+                @Html.ActionLink("Details", "Details", new { idAlbum = item.Id })
+                | @Html.ActionLink("Delete", "Delete", new { idAlbum = item.Id })
+                | @Html.ActionLink("Edit", "Edit", new { idAlbum = item.Id })
             </td>
         </tr>
 }
