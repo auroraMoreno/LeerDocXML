@@ -15,16 +15,8 @@ namespace LeerDocXML
 {
     public class Startup
     {
-        IConfiguration configuration;
-
-        public Startup(IConfiguration configuration)
-        {
-            this.configuration = configuration;
-        }
-
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IConfiguration>(this.configuration);
             services.AddSingleton<PathProvider>();
 
             services.AddTransient<IRepositoryMusica, RepositoryMusica>();
